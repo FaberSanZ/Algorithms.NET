@@ -1,4 +1,5 @@
 ﻿using Algorithms.DataStructures;
+using Algorithms.Sorting;
 using System;
 
 namespace Algorithms.TestConsole
@@ -11,12 +12,17 @@ namespace Algorithms.TestConsole
 
             for (int i = 0; i < 12; i++)
             {
-                var r = i * new Random(1).Next(100);
+                var r = i + 1;
                 Console.WriteLine(r);
                 list.Add(r);
             }
 
-            Console.WriteLine(list);
+
+            list.DeleteElement(5);
+
+           list.ToList().SortExt<int>();
+            Console.WriteLine(list.IsEmpty);
+            Console.WriteLine(list[1]);
             Console.WriteLine("-----------------");
             Console.WriteLine(list.Count);
             //Console.WriteLine(count);
