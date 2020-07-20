@@ -4,152 +4,287 @@ using System.Collections.Generic;
 
 namespace Algorithms.DataStructures
 {
-    public class LinkedList<T> : IEnumerable<T>
+    public class DoublyLinkedList<T> : IEnumerable<T>
     {
-        public LinkedList()
-        {
-            Head = null;
-            Count = 0;
-        }
 
-        public LinkedList(IEnumerable<T> data)
+        // Internal node class to represent data
+        internal class Node<T>
         {
-            foreach (T d in data)
+            public Node(T data, Node<T> prev, Node<T> next)
             {
-                Add(d);
+                Data = data;
+                Prev = prev;
+                Next = next;
+            }
+
+            public Node<T>? Prev { get; set; }
+            public Node<T>? Next { get; set; }
+            public T Data { get; set; }
+
+
+
+            public override string ToString()
+            {
+                return string.Format($"-{Data}-");
             }
         }
 
-
-        public LinkedListNode<T> Head { get; private set; }
-        public LinkedListNode<T> Tail { get; private set; }
-        public int Count { get; private set; }
-        public bool IsEmpty => Count == 0 || Head is null;
-
-        public T this[int i] => ToArray()[i];
-
-
-        public void Add(T data)
+        public DoublyLinkedList()
         {
-            LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+            Head = null;
+            Size = 0;
+        }
 
-            if (Head is null)
+        //public DoublyLinkedList(IEnumerable<T> data)
+        //{
+        //    foreach (T d in data)
+        //    {
+        //        Add(d);
+        //    }
+        //}
+
+
+        public int Size { get; set; }
+        internal Node<T> Head { get; set; }
+        internal Node<T> Tail { get; set; }
+        public bool IsEmpty => Size == 0 || Head is null;
+        //public T this[int i] => ToArray()[i];
+
+
+
+
+
+        // Empty this linked list, O(n)
+        public void Clear()
+        {
+            Node<T> trav = Head;
+            while (trav != null)
             {
-                Head = new LinkedListNode<T>(data);
+                Node<T> next = trav.Next;
+                trav.Prev = trav.Next = null;
+                trav.Data = default; // null?
+                trav = next;
+            }
+            Head = Tail = trav = null;
+            Size = 0;
+        }
 
-                Count += 1;
+
+        // Add an element to the tail of the linked list, O(1)
+        public void add(T elem)
+        {
+            AddLast(elem);
+        }
+
+        // Add a node to the tail of the linked list, O(1)
+        public void AddLast(T elem)
+        {
+            if (IsEmpty)
+            {
+                Head = Tail = new Node<T>(elem, null, null);
             }
             else
             {
-                LinkedListNode<T> current = Head;
-                while (current.Next != null)
-                {
-                    current = current.Next;
-                }
-                current.Next = newNode;
-                Count++;
+                Tail.Next = new Node<T>(elem, Tail, null);
+                Tail = Tail.Next;
             }
+            Size++;
         }
 
-        public LinkedListNode<T> AddFirst(T data)
+
+        // Add an element to the beginning of this linked list, O(1)
+        public void AddFirst(T elem)
         {
-            LinkedListNode<T> newListElement = new LinkedListNode<T>(data)
+            if (IsEmpty)
             {
-                Next = Head,
-            };
-
-            Head = newListElement;
-
-            return newListElement;
+                Head = Tail = new Node<T>(elem, null, null);
+            }
+            else
+            {
+                Head.Prev = new Node<T>(elem, null, Head);
+                Head = Head.Prev;
+            }
+            Size++;
         }
 
 
-        public LinkedListNode<T> AddLast(T data)
-        {
-            LinkedListNode<T> newElement = new LinkedListNode<T>(data);
-
-            if (Head is null)
-            {
-                Head = newElement;
-                return newElement;
-            }
-
-            LinkedListNode<T> tempElement = Head;
-
-            while (tempElement.Next != null)
-            {
-                tempElement = tempElement.Next;
-            }
-
-            tempElement.Next = newElement;
-            return newElement;
-        }
-
-
-
-        public T GetElementByIndex(int index)
+        // Add an element at a specified index
+        public void AddAt(int index, T data)
         {
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new Exception("Illegal Index");
             }
-
-            LinkedListNode<T> tempElement = Head;
-
-            for (int i = 0; tempElement != null && i < index; i++)
+            if (index == 0)
             {
-                tempElement = tempElement.Next;
+                AddFirst(data);
+                return;
             }
 
-            if (tempElement is null)
+            if (index == Size)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                AddLast(data);
+                return;
             }
 
-            return tempElement.Data;
+            Node<T> temp = Head;
+            for (int i = 0; i < index - 1; i++)
+            {
+                temp = temp.Next;
+            }
+            Node<T> newNode = new Node<T>(data, temp, temp.Next);
+            temp.Next.Prev = newNode;
+            temp.Next = newNode;
+
+            Size++;
         }
 
-        public bool DeleteElement(T element)
+        // Check the value of the first node if it exists, O(1)
+        public T PeekFirst()
         {
-            LinkedListNode<T> current = Head;
-
-            LinkedListNode<T>? previous = null;
-
-
-            while (current != null)
+            if (IsEmpty)
             {
-                if ((current.Data is null && element is null) || (current.Data != null && current.Data.Equals(element)))
-                {
-                    // if element is head just take the next one as head
-                    if (current.Equals(Head))
-                    {
-                        Head = Head.Next;
-                        Count--;
-                        return true;
-                    }
+                throw new Exception("Empty list");
+            }
 
-                    if (previous != null)
-                    {
-                        previous.Next = current.Next;
-                        Count--;
-                        return true;
-                    }
+            return Head.Data;
+        }
+
+
+
+        // Check the value of the last node if it exists, O(1)
+        public T PeekLast()
+        {
+            if (IsEmpty)
+            {
+                throw new Exception("Empty list");
+            }
+
+            return Tail.Data;
+        }
+
+        // Remove the first value at the head of the linked list, O(1)
+        public T RemoveFirst()
+        {
+            // Can't remove data from an empty list
+            if (IsEmpty)
+            {
+                throw new Exception("Empty list");
+            }
+
+            // Extract the data at the head and move
+            // the head pointer forwards one node
+            T data = Head.Data;
+            Head = Head.Next;
+            --Size;
+
+            // If the list is empty set the tail to null
+            if (IsEmpty)
+            {
+                Tail = null;
+            }
+            // Do a memory cleanup of the previous node
+            else
+            {
+                Head.Prev = null;
+            }
+
+            // Return the data that was at the first node we just removed
+            return data;
+        }
+
+        // Remove the last value at the tail of the linked list, O(1)
+        public T RemoveLast()
+        {
+            // Can't remove data from an empty list
+            if (IsEmpty)
+            {
+                throw new Exception("Empty list");
+            }
+
+            // Extract the data at the tail and move
+            // the tail pointer backwards one node
+            T data = Tail.Data;
+            Tail = Tail.Prev;
+            --Size;
+
+            // If the list is now empty set the head to null
+            if (IsEmpty)
+            {
+                Head = null;
+            }
+            // Do a memory clean of the node that was just removed
+            else
+            {
+                Tail.Next = null;
+            }
+
+            // Return the data that was in the last node we just removed
+            return data;
+        }
+
+
+        // Remove an arbitrary node from the linked list, O(1)
+        internal T Remove(Node<T> node)
+        {
+            // If the node to remove is somewhere either at the
+            // head or the tail handle those independently
+            if (node.Prev == null)
+            {
+                return RemoveFirst();
+            }
+
+            if (node.Next == null)
+            {
+                return RemoveLast();
+            }
+
+            // Make the pointers of adjacent nodes skip over 'node'
+            node.Next.Prev = node.Prev;
+            node.Prev.Next = node.Next;
+
+            // Temporarily store the data we want to return
+            T data = node.Data;
+
+            // Memory cleanup
+            node.Data = default; // null?
+            node = node.Prev = node.Next = null;
+
+            --Size;
+
+            // Return the data in the node we just removed
+            return data;
+        }
+
+
+        // Remove a node at a particular index, O(n)
+        public T RemoveAt(int index)
+        {
+            // Make sure the index provided is valid
+            if (index < 0 || index >= Size)
+            {
+                throw new Exception(); // TODO:
+            }
+
+            int i;
+            Node<T> trav;
+
+            // Search from the front of the list
+            if (index < Size / 2)
+            {
+                for (i = 0, trav = Head; i != index; i++)
+                {
+                    trav = trav.Next;
+                }
+                // Search from the back of the list
+            }
+            else
+                for (i = Size - 1, trav = Tail; i != index; i--)
+                {
+                    trav = trav.Prev;
                 }
 
-                // iterating
-                previous = current;
-
-                current = current.Next;
-            }
-
-
-            return false;
-        }
-
-        public void Clear()
-        {
-            Head = null;
-            Count = 0;
+            return Remove(trav);
         }
 
 
@@ -157,7 +292,7 @@ namespace Algorithms.DataStructures
         public List<T> ToList()
         {
             List<T> arr = new List<T>();
-            LinkedListNode<T> current = Head;
+            Node<T> current = Head;
             while (current != null)
             {
                 arr.Add(current.Data);
@@ -184,7 +319,7 @@ namespace Algorithms.DataStructures
 
         public IEnumerator<T> GetEnumerator()
         {
-            LinkedListNode<T> current = Head;
+            Node<T> current = Head;
             while (current != null)
             {
                 yield return current.Data;
@@ -200,31 +335,13 @@ namespace Algorithms.DataStructures
 
         public override string ToString()
         {
-            if (Head is null)
-            {
-                return string.Format($"Elements length is: {Count}");
-            }
-            else
-            {
-                return string.Join(", ", ToArray());
-            }
+
+            return string.Join(", ", ToArray());
+            
         }
 
 
 
-    }
-
-    public class LinkedListNode<T>
-    {
-        public LinkedListNode(T data)
-        {
-            Data = data;
-            Next = null;
-
-        }
-
-        public LinkedListNode<T>? Next { get; set; }
-        public T Data { get; }
     }
 
 }
