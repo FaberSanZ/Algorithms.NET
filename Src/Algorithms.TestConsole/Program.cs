@@ -1,31 +1,30 @@
 ﻿using Algorithms.DataStructures;
-using Algorithms.Sorting;
 using System;
-using System.Collections.Generic;
 
 namespace Algorithms.TestConsole
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-           // DoublyLinkedList<int> list = new LinkedList<int>();
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
 
-           // for (int i = 0; i < 12; i++)
-           // {
-           //     var r = i + 1;
-           //     Console.WriteLine(r);
-           //     list.Add(r);
-           // }
+            for (int i = 0; i < 12; i++)
+            {
+                int r = i + 1;
+                list.Add(r);
+            }
+            Console.WriteLine(list);
+            //foreach (int l in list)
+            //{
+            //    Console.WriteLine(l);
+            //}
+            //list.DeleteElement(5);
 
-
-           // list.DeleteElement(5);
-
-           //list.ToList().SortExt<int>();
-           // Console.WriteLine(list.IsEmpty);
-           // Console.WriteLine(list[1]);
-           // Console.WriteLine("-----------------");
-           // Console.WriteLine(list.Count);
+            // Console.WriteLine(list.IsEmpty);
+            // Console.WriteLine(list[1]);
+            // Console.WriteLine("-----------------");
+            // Console.WriteLine(list.Count);
             //Console.WriteLine(count);
         }
     }

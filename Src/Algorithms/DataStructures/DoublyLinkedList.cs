@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Algorithms.DataStructures
 {
@@ -31,7 +32,8 @@ namespace Algorithms.DataStructures
 
         public DoublyLinkedList()
         {
-            Head = null;
+            Head = Tail = null;
+
             Size = 0;
         }
 
@@ -45,9 +47,9 @@ namespace Algorithms.DataStructures
 
 
         public int Size { get; set; }
-        internal Node<T> Head { get; set; }
-        internal Node<T> Tail { get; set; }
-        public bool IsEmpty => Size == 0 || Head is null;
+        internal Node<T>? Head { get; set; }
+        internal Node<T>? Tail { get; set; }
+        public bool IsEmpty => Size == 0 || Head is null || Tail is null;
         //public T this[int i] => ToArray()[i];
 
 
@@ -71,7 +73,7 @@ namespace Algorithms.DataStructures
 
 
         // Add an element to the tail of the linked list, O(1)
-        public void add(T elem)
+        public void Add(T elem)
         {
             AddLast(elem);
         }
@@ -279,13 +281,88 @@ namespace Algorithms.DataStructures
                 // Search from the back of the list
             }
             else
+            {
                 for (i = Size - 1, trav = Tail; i != index; i--)
                 {
                     trav = trav.Prev;
                 }
+            }
 
             return Remove(trav);
         }
+
+
+        // Remove a particular value in the linked list, O(n)
+        public bool Remove(T obj)
+        {
+            Node<T> trav = Head;
+
+            // Support searching for null
+            if (obj is null)
+            {
+                for (trav = Head; trav != null; trav = trav.Next)
+                {
+                    if (trav.Data is null)
+                    {
+                        Remove(trav);
+                        return true;
+                    }
+                }
+                // Search for non null object
+            }
+            else
+            {
+                for (trav = Head; trav != null; trav = trav.Next)
+                {
+                    if (obj.Equals(trav.Data))
+                    {
+                        Remove(trav);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+        // Find the index of a particular value in the linked list, O(n)
+        public int IndexOf(T obj)
+        {
+            int index = 0;
+            Node<T> trav = Head;
+
+            // Support searching for null
+            if (obj is null)
+            {
+                for (; trav != null; trav = trav.Next, index++)
+                {
+                    if (trav.Data is null)
+                    {
+                        return index;
+                    }
+                }
+                // Search for non null object
+            }
+            else
+            {
+                for (; trav != null; trav = trav.Next, index++)
+                {
+                    if (obj.Equals(trav.Data))
+                    {
+                        return index;
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        // Check is a value is contained within the linked list
+        public bool Contains(T obj)
+        {
+            return IndexOf(obj) != -1;
+        }
+
 
 
 
@@ -336,8 +413,21 @@ namespace Algorithms.DataStructures
         public override string ToString()
         {
 
-            return string.Join(", ", ToArray());
-            
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[ ");
+            Node<T> trav = Head;
+            while (trav != null)
+            {
+                sb.Append(trav.Data.ToString());
+                if (trav.Next != null)
+                {
+                    sb.Append(", ");
+                }
+                trav = trav.Next;
+            }
+            sb.Append(" ]");
+
+            return sb.ToString();
         }
 
 
