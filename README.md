@@ -10,4 +10,4 @@ Algorithms and data structures are fundamental to efficient code and good softwa
 
 # Running an algorithm implementation
 
-To compile and run any of the algorithms here, you need at least .NET Core 3.1. Gradle can make things more convenient for you, but it is not required.
+To compile and run any of the algorithms here, you need at least .NET Core 3.1. Visual Studio 2019 can make things more convenient for you, but it is not required.
