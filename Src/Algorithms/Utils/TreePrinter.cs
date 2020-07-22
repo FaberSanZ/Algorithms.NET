@@ -44,7 +44,7 @@ namespace Algorithms.Utils
                 List<string> line = new List<string>();
                 foreach (IPrintableNode n in level)
                 {
-                    if (n == null)
+                    if (n is null)
                     {
                         line.Add(null);
                         next.Add(null);
@@ -117,7 +117,7 @@ namespace Algorithms.Utils
                         sb.Append(c);
 
                         // lines and spaces
-                        if (line[j] == null)
+                        if (line[j] is null)
                         {
                             for (int k = 0; k < perpiece - 1; k++)
                             {
@@ -142,7 +142,7 @@ namespace Algorithms.Utils
                 for (int j = 0; j < line.Count; j++)
                 {
                     string f = line[j];
-                    if (f == null)
+                    if (f is null)
                     {
                         f = "";
                     }

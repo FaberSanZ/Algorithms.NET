@@ -26,9 +26,14 @@ namespace Algorithms.DataStructures
 
             public override string ToString()
             {
-                return string.Format($"-{Data}-");
+                return string.Format($"{Data}");
             }
         }
+
+
+        internal Node<T>? Head;
+        internal Node<T>? Tail;
+
 
         public DoublyLinkedList()
         {
@@ -37,19 +42,20 @@ namespace Algorithms.DataStructures
             Size = 0;
         }
 
-        //public DoublyLinkedList(IEnumerable<T> data)
-        //{
-        //    foreach (T d in data)
-        //    {
-        //        Add(d);
-        //    }
-        //}
+        public DoublyLinkedList(IEnumerable<T> data)
+        {
+            foreach (T d in data)
+            {
+                Add(d);
+            }
+        }
 
 
-        public int Size { get; set; }
-        internal Node<T>? Head { get; set; }
-        internal Node<T>? Tail { get; set; }
-        public bool IsEmpty => Size == 0 || Head is null || Tail is null;
+        public int Size { get; private set; }
+
+        public bool IsEmpty => Size == 0 /*|| Head is null || Tail is null*/;
+
+
         //public T this[int i] => ToArray()[i];
 
 
