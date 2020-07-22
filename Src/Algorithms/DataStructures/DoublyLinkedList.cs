@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Algorithms.DataStructures
 {
-    public class DoublyLinkedList<T> : IEnumerable<T>
+    public class DoublyLinkedList<T> : IEnumerable<T>, IDisposable
     {
 
         // Internal node class to represent data
@@ -418,7 +418,7 @@ namespace Algorithms.DataStructures
             Node<T> trav = Head;
             while (trav != null)
             {
-                sb.Append(trav.Data.ToString());
+                sb.Append(trav.Data);
                 if (trav.Next != null)
                 {
                     sb.Append(", ");
@@ -430,8 +430,11 @@ namespace Algorithms.DataStructures
             return sb.ToString();
         }
 
-
-
+        public void Dispose()
+        {
+            Clear();
+            //GC.SuppressFinalize(this);
+        }
     }
 
 }
