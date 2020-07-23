@@ -1,11 +1,9 @@
-﻿namespace Algorithms.Sorting
-{
-    // A shared abstract amongst sorting algorithms which
-    public abstract class InplaceSort
-    {
-        public abstract void Sort(int[] values);
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-    }
+namespace Algorithms.Sorting
+{
     public class BubbleSort : InplaceSort
     {
         public BubbleSort()
@@ -16,6 +14,18 @@
         {
             bubbleSort(values);
         }
+
+        public BubbleSort(IEnumerable<int> values)
+        {
+            //int[] va = new int[values.Count()];
+            //for (int i = 0; i < va.Length; i++)
+            //{
+            //    va[i] = values.ElementAt(i);
+            //}
+
+            bubbleSort(values.ToArray());
+        }
+
 
         public override void Sort(int[] values)
         {
@@ -29,7 +39,7 @@
         // until the entire array is sorted.
         internal void bubbleSort(int[] ar)
         {
-            if (ar is null || ar.Length <= 0)
+            if (ar is null || ar.Length is 0)
             {
                 return;
             }
