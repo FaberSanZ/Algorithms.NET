@@ -25,11 +25,6 @@ namespace Algorithms.TestConsole
 
             list.RemoveAt(5);
 
-
-            // Console.WriteLine(list.IsEmpty);
-            // Console.WriteLine(list[1]); // TODO:
-            // Console.WriteLine("-----------------");
-
         }
     }
 }

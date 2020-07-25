@@ -5,7 +5,6 @@ namespace Algorithms.Sorting
 {
     public class BucketSort : InplaceSort
     {
-
         public BucketSort()
         {
 
@@ -34,9 +33,6 @@ namespace Algorithms.Sorting
             }
             bucketSort(values, minValue, maxValue);
         }
-
-
-
 
 
         public override void Sort(int[] values)

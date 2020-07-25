@@ -22,8 +22,6 @@ namespace Algorithms.DataStructures
             public Node<T>? Next { get; set; }
             public T Data { get; set; }
 
-
-
             public override string ToString()
             {
                 return string.Format($"{Data}");
@@ -56,13 +54,14 @@ namespace Algorithms.DataStructures
         public bool IsEmpty => Size == 0 /*|| Head is null || Tail is null*/;
 
 
-        //public T this[int i] => ToArray()[i];
+        public T this[int i] => ToArray()[i];
 
 
 
 
-
-        // Empty this linked list, O(n)
+        /// <summary>
+        /// Empty this linked list, O(n)
+        /// </summary>
         public void Clear()
         {
             Node<T> trav = Head;
