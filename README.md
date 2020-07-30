@@ -3,6 +3,9 @@
 
 # Algorithms & data structures project
 
+This repository presents the C# code implementation of the provided Algorithms and data structures from William Fiset at:
+https://github.com/williamfiset/Algorithms.
+
 Algorithms and data structures are fundamental to efficient code and good software design. Creating and designing excellent algorithms is required for being an exemplary programmer. This repository's goal is to demonstrate how to correctly implement common data structures and algorithms in the simplest and most elegant ways.
 
 # Contributing
