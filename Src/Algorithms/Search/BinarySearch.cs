@@ -12,13 +12,13 @@ namespace Algorithms.Search
 
         public BinarySearch(double lo, double hi, double target, Func<double, double> function)
         {
-            BinarySearchData = binarySearch(lo, hi, target, function);
+            BinarySearchData = Search(lo, hi, target, function);
         }
 
         public double BinarySearchData { get; set; }
 
 
-        internal double binarySearch(double lo, double hi, double target, Func<double, double> function)
+        public double Search(double lo, double hi, double target, Func<double, double> function)
         {
 
             if (hi <= lo)
@@ -50,5 +50,6 @@ namespace Algorithms.Search
 
             return mid;
         }
+
     }
 }

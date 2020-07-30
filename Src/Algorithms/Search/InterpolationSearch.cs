@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Algorithms.Search
+﻿namespace Algorithms.Search
 {
     public class InterpolationSearch
     {
@@ -21,6 +17,19 @@ namespace Algorithms.Search
         public int InterpolationSearchData { get; set; }
 
 
+
+        /// <summary>
+        /// A fast alternative to a binary search when the elements are uniformly distributed. This
+        /// algorithm runs in a time complexity of ~O(log(log(n))).
+        /// </summary>
+        /// <param name="nums">an ordered list containing uniformly distributed values.</param>
+        /// <param name="val">the value we're looking for in 'nums'</param>
+        public int Search(int[] nums, int val)
+        {
+            return interpolationSearch(nums, val);
+        }
+
+
         private int interpolationSearch(int[] nums, int val)
         {
             int lo = 0, mid = 0, hi = nums.Length - 1;
@@ -35,9 +44,16 @@ namespace Algorithms.Search
                 {
                     hi = mid - 1;
                 }
-                else return mid;
+                else
+                {
+                    return mid;
+                }
             }
-            if (nums[lo] == val) return lo;
+            if (nums[lo] == val)
+            {
+                return lo;
+            }
+
             return -1;
         }
 
