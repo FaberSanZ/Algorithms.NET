@@ -76,14 +76,20 @@ namespace Algorithms.DataStructures
             Size = 0;
         }
 
-
-        // Add an element to the tail of the linked list, O(1)
+        /// <summary>
+        /// Add an element to the tail of the linked list, O(1)
+        /// </summary>
+        // <param name="elem"></param>
         public void Add(T elem)
         {
             AddLast(elem);
         }
 
-        // Add a node to the tail of the linked list, O(1)
+
+        /// <summary>
+        /// Add a node to the tail of the linked list, O(1)
+        /// </summary>
+        // <param name="elem"></param>
         public void AddLast(T elem)
         {
             if (IsEmpty)
