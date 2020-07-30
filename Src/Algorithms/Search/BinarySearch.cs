@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Algorithms.Search
 {
@@ -10,7 +8,6 @@ namespace Algorithms.Search
         // Using a small epsilon value is the preferred approach
         private static readonly double EPS = 0.00000001;
 
-        public double BinarySearchData { get; set; }
 
 
         public BinarySearch(double lo, double hi, double target, Func<double, double> function)
@@ -18,12 +15,16 @@ namespace Algorithms.Search
             BinarySearchData = binarySearch(lo, hi, target, function);
         }
 
+        public double BinarySearchData { get; set; }
 
 
-        internal double binarySearch( double lo, double hi, double target, Func<double , double> function)
+        internal double binarySearch(double lo, double hi, double target, Func<double, double> function)
         {
 
-            if (hi <= lo) throw new Exception("hi should be greater than lo");
+            if (hi <= lo)
+            {
+                throw new Exception("hi should be greater than lo");
+            }
 
             double mid;
             do
