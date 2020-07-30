@@ -1,4 +1,4 @@
-﻿namespace Algorithms
+﻿namespace Algorithms.Other
 {
     public static class BitManipulations
     {
