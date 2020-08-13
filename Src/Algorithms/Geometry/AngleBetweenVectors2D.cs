@@ -33,7 +33,7 @@ namespace Algorithms.Geometry
         }
 
 
-        //public static double AngleBetweenVectors(Vector2 v, Vector2 v2)
+        //public static double AngleBetweenVectors(Vector2 v1, Vector2 v2)
         //{
 
         //    // To determine the angle between two vectors v1 and v2 we can use
