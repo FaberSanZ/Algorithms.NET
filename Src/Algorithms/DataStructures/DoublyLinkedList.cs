@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Algorithms.DataStructures
@@ -51,10 +52,14 @@ namespace Algorithms.DataStructures
 
         public int Size { get; private set; }
 
-        public bool IsEmpty => Size == 0 /*|| Head is null || Tail is null*/;
+        public bool IsEmpty => Size is 0;
 
 
-        public T this[int i] => ToArray()[i];
+        public T this[int i] 
+        { 
+            get => this.ToArray()[i]; 
+            set => AddAt(i, value);
+        }
 
 
 
@@ -79,7 +84,6 @@ namespace Algorithms.DataStructures
         /// <summary>
         /// Add an element to the tail of the linked list, O(1)
         /// </summary>
-        // <param name="elem"></param>
         public void Add(T elem)
         {
             AddLast(elem);
@@ -89,7 +93,6 @@ namespace Algorithms.DataStructures
         /// <summary>
         /// Add a node to the tail of the linked list, O(1)
         /// </summary>
-        // <param name="elem"></param>
         public void AddLast(T elem)
         {
             if (IsEmpty)
@@ -105,7 +108,9 @@ namespace Algorithms.DataStructures
         }
 
 
-        // Add an element to the beginning of this linked list, O(1)
+        /// <summary>
+        /// Add an element to the beginning of this linked list, O(1)
+        /// </summary>
         public void AddFirst(T elem)
         {
             if (IsEmpty)
@@ -121,7 +126,9 @@ namespace Algorithms.DataStructures
         }
 
 
-        // Add an element at a specified index
+        /// <summary>
+        /// Add an element at a specified index
+        /// </summary>
         public void AddAt(int index, T data)
         {
             if (index < 0)
@@ -152,7 +159,9 @@ namespace Algorithms.DataStructures
             Size++;
         }
 
-        // Check the value of the first node if it exists, O(1)
+        /// <summary>
+        /// Check the value of the first node if it exists, O(1)
+        /// </summary>
         public T PeekFirst()
         {
             if (IsEmpty)
@@ -176,7 +185,11 @@ namespace Algorithms.DataStructures
             return Tail.Data;
         }
 
-        // Remove the first value at the head of the linked list, O(1)
+
+        /// <summary>
+        ///  Remove the first value at the head of the linked list, O(1)
+        /// </summary>
+        /// <returns></returns>
         public T RemoveFirst()
         {
             // Can't remove data from an empty list
@@ -206,7 +219,11 @@ namespace Algorithms.DataStructures
             return data;
         }
 
-        // Remove the last value at the tail of the linked list, O(1)
+
+
+        /// <summary>
+        /// Remove the last value at the tail of the linked list, O(1)
+        /// </summary>
         public T RemoveLast()
         {
             // Can't remove data from an empty list
@@ -237,7 +254,9 @@ namespace Algorithms.DataStructures
         }
 
 
-        // Remove an arbitrary node from the linked list, O(1)
+        /// <summary>
+        /// Remove an arbitrary node from the linked list, O(1)
+        /// </summary>
         internal T Remove(Node<T> node)
         {
             // If the node to remove is somewhere either at the
@@ -270,7 +289,9 @@ namespace Algorithms.DataStructures
         }
 
 
-        // Remove a node at a particular index, O(n)
+        /// <summary>
+        /// Remove a node at a particular index, O(n)
+        /// </summary>
         public T RemoveAt(int index)
         {
             // Make sure the index provided is valid
@@ -303,7 +324,10 @@ namespace Algorithms.DataStructures
         }
 
 
-        // Remove a particular value in the linked list, O(n)
+        // 
+        /// <summary>
+        /// Remove a particular value in the linked list, O(n)
+        /// </summary>
         public bool Remove(T obj)
         {
             Node<T> trav = Head;
@@ -336,7 +360,9 @@ namespace Algorithms.DataStructures
         }
 
 
-        // Find the index of a particular value in the linked list, O(n)
+        /// <summary>
+        /// Find the index of a particular value in the linked list, O(n)
+        /// </summary>
         public int IndexOf(T obj)
         {
             int index = 0;
@@ -368,7 +394,9 @@ namespace Algorithms.DataStructures
             return -1;
         }
 
-        // Check is a value is contained within the linked list
+        /// <summary>
+        /// Check is a value is contained within the linked list
+        /// </summary>
         public bool Contains(T obj)
         {
             return IndexOf(obj) != -1;
@@ -377,32 +405,18 @@ namespace Algorithms.DataStructures
 
 
 
-        public List<T> ToList()
-        {
-            List<T> arr = new List<T>();
-            Node<T> current = Head;
-            while (current != null)
-            {
-                arr.Add(current.Data);
-                current = current.Next;
-            }
+        //public List<T> ToList()
+        //{
+        //    List<T> arr = new List<T>();
+        //    Node<T> current = Head;
+        //    while (current != null)
+        //    {
+        //        arr.Add(current.Data);
+        //        current = current.Next;
+        //    }
 
-            return arr;
-        }
-
-
-        public T[] ToArray()
-        {
-            List<T> list = ToList();
-
-            T[] array = new T[list.Count];
-            for (int i = 0; i < list.Count; i++)
-            {
-                array[i] = list[i];
-            }
-
-            return array /*list.ToArray();*/;
-        }
+        //    return arr;
+        //}
 
 
         public IEnumerator<T> GetEnumerator()

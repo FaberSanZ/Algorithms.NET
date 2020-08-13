@@ -1,5 +1,6 @@
 ﻿using Algorithms.DataStructures;
 using System;
+using System.Linq;
 
 namespace Algorithms.TestConsole
 {
@@ -7,24 +8,16 @@ namespace Algorithms.TestConsole
     {
         private static void Main(string[] args)
         {
-            DoublyLinkedList<int> list = new DoublyLinkedList<int>();
-
-            for (int i = 0; i < 12; i++)
+            DoublyLinkedList<int> list = new DoublyLinkedList<int>()
             {
-                int r = i * new Random().Next(8, 16);
-                list.Add(r);
-            }
+                1, 2, 3
+            };
 
+            list[3] = 4;
+            list[4] = 5;
 
-            Console.WriteLine(list);
-            //foreach (int l in list)
-            //{
-            //    Console.WriteLine(l);
-            //}
-
-
-            list.RemoveAt(5);
-
+            foreach (int l in list)
+                Console.WriteLine(l);
         }
     }
 }

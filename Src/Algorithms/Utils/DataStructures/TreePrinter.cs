@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Algorithms.Utils
+namespace Algorithms.Utils.DataStructures
 {
 
     /** Node that can be printed */
