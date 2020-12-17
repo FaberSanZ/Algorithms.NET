@@ -13,10 +13,11 @@ namespace Algorithms.TestConsole
                 2, 4, 8
             };
 
+            // Indexers 
             list[3] = 16;
             list[4] = 32;
 
-            foreach (int l in list)
+            foreach (int l in list) // IEnumerable<T>
                 Console.WriteLine(l);
         }
     }
