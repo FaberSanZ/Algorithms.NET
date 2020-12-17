@@ -63,7 +63,7 @@ namespace Algorithms.Search
                     high = mid2;
                 }
 
-                if (best != null && Math.Abs(best - mid1) < EPS)
+                if (best != null && System.Math.Abs(best - mid1) < EPS)
                 {
                     break;
                 }

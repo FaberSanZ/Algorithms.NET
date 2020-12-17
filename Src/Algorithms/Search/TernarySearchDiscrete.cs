@@ -37,11 +37,11 @@ namespace Algorithms.Search
         {
             while (lo != hi)
             {
-                if (hi - lo == 1) return Math.Min(f(lo), f(hi));
-                if (hi - lo == 2) return Math.Min(f(lo), Math.Min(f(lo + 1), f(hi)));
+                if (hi - lo == 1) return System.Math.Min(f(lo), f(hi));
+                if (hi - lo == 2) return System.Math.Min(f(lo), System.Math.Min(f(lo + 1), f(hi)));
                 int mid1 = (2 * lo + hi) / 3, mid2 = (lo + 2 * hi) / 3;
                 double res1 = f(mid1), res2 = f(mid2);
-                if (Math.Abs(res1 - res2) < 0.000000001)
+                if (System.Math.Abs(res1 - res2) < 0.000000001)
                 {
                     lo = mid1;
                     hi = mid2;

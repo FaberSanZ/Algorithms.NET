@@ -10,11 +10,11 @@ namespace Algorithms.TestConsole
         {
             DoublyLinkedList<int> list = new DoublyLinkedList<int>()
             {
-                1, 2, 3
+                2, 4, 8
             };
 
-            list[3] = 4;
-            list[4] = 5;
+            list[3] = 16;
+            list[4] = 32;
 
             foreach (int l in list)
                 Console.WriteLine(l);

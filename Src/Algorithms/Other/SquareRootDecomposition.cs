@@ -13,7 +13,7 @@ namespace Algorithms.Other
         public SquareRootDecomposition(int size)
         {
 
-            blockSize = (int)Math.Sqrt(size);
+            blockSize = (int)System.Math.Sqrt(size);
             nBlocks = (size / blockSize) + 1;
             blocks = new long[nBlocks];
             arr = new long[size];

@@ -92,7 +92,7 @@ namespace Algorithms.Utils.DataStructures
             for (int i = 0; i < lines.Count; i++)
             {
                 List<string> line = lines[i];
-                int hpw = (int)Math.Floor(perpiece / 2f) - 1;
+                int hpw = (int)System.Math.Floor(perpiece / 2f) - 1;
                 if (i > 0)
                 {
                     for (int j = 0; j < line.Count; j++)
@@ -147,8 +147,8 @@ namespace Algorithms.Utils.DataStructures
                         f = "";
                     }
 
-                    int gap1 = (int)Math.Ceiling(perpiece / 2f - f.Length / 2f);
-                    int gap2 = (int)Math.Floor(perpiece / 2f - f.Length / 2f);
+                    int gap1 = (int)System.Math.Ceiling(perpiece / 2f - f.Length / 2f);
+                    int gap2 = (int)System.Math.Floor(perpiece / 2f - f.Length / 2f);
 
                     for (int k = 0; k < gap1; k++)
                     {
